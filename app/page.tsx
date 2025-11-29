@@ -37,7 +37,7 @@ export default function Home() {
   ];
 
   return (
-    <>
+    <div className="container mx-auto">
     <Navbar sections={sections} />
     <section ref={homeRef} className="relative min-h-screen h-auto w-full bg-black overflow-hidden">
       {/* Background ImageTrail */}
@@ -162,6 +162,6 @@ export default function Home() {
     <footer ref={footerRef}>
       <Footer />
     </footer>
-    </>
+    </div>
   );
 }

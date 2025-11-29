@@ -1,14 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useInView } from "motion/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import VariableProximity from "@/components/shared/variable-proximity";
+
+// Register ScrollTrigger plugin
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function ProcessSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const stepsRef = useRef<HTMLDivElement>(null);
+  const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const stepTextRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   const stepsInView = useInView(stepsRef, { once: true, amount: 0.2 });
 
@@ -93,15 +102,86 @@ export default function ProcessSection() {
     },
   };
 
+  // GSAP ScrollTrigger for number opacity animation with scroll hijacking
+  useEffect(() => {
+    const stepsElement = stepsRef.current;
+    const sectionElement = sectionRef.current;
+    if (!stepsElement || !sectionElement) return;
+
+    // Set initial opacity to 30% for all numbers and step texts
+    numberRefs.current.forEach((numberRef) => {
+      if (numberRef) {
+        gsap.set(numberRef, { opacity: 0.2});
+      }
+    });
+    
+    stepTextRefs.current.forEach((stepTextRef) => {
+      if (stepTextRef) {
+        gsap.set(stepTextRef, { opacity: 0.2});
+      }
+    });
+
+    // Create a timeline for all three number animations
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionElement,
+        start: "top top",
+        end: "+=1000", // Scroll distance to complete animation
+        pin: true,
+        scrub: 1, // Smooth scrubbing
+        anticipatePin: 1,
+      },
+    });
+
+    // Animate each number and corresponding step text sequentially
+    numberRefs.current.forEach((numberRef, index) => {
+      if (numberRef) {
+        tl.to(
+          numberRef,
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          index * 0.2 // Stagger the animations
+        );
+      }
+      
+      // Animate the corresponding step text at the same time
+      const stepTextRef = stepTextRefs.current[index];
+      if (stepTextRef) {
+        tl.to(
+          stepTextRef,
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          index * 0.2 // Same timing as the number
+        );
+      }
+    });
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars.trigger === sectionElement) {
+          trigger.kill();
+        }
+      });
+      tl.kill();
+    };
+  }, []);
+
   return (
     <section 
       ref={sectionRef}
-      className="w-full min-h-screen bg-black flex flex-col lg:flex-row"
+      className="w-full my-20 min-h-screen bg-black flex flex-col lg:flex-row lg:items-stretch"
     >
       {/* Left Section - Text Content */}
       <div 
         ref={containerRef}
-        className="w-full lg:w-1/2 bg-black p-8 md:p-12 lg:p-16 xl:p-20 flex flex-col justify-center"
+        className="w-full lg:w-1/2 bg-black px-8 md:px-12 lg:px-16 xl:px-20 flex flex-col justify-start"
       >
         <motion.h2 
           className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-12 md:mb-16 leading-tight"
@@ -152,20 +232,23 @@ export default function ProcessSection() {
                   variants={numberVariants}
                 >
                   <div className="w-full h-full rounded-full flex items-center justify-center bg-black">
-                    <span className="text-white text-[24px] font-semibold">
+                    <span 
+                      ref={(el) => {
+                        numberRefs.current[index] = el;
+                      }}
+                      className="text-white text-[24px] font-semibold"
+                      style={{ opacity: 0.2}}
+                    >
                       {step.number}
                     </span>
                   </div>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={stepsInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                  transition={{ 
-                    duration: 0.6, 
-                    delay: 0.3 + (index * 0.2),
-                    ease: [0.22, 1, 0.36, 1]
+                <div
+                  ref={(el) => {
+                    stepTextRefs.current[index] = el;
                   }}
+                  style={{ opacity: 0.2}}
                 >
                   <h3 className="text-xl md:text-2xl lg:text-3xl font-semibold text-white mb-2 md:mb-3">
                     {step.title}
@@ -173,7 +256,7 @@ export default function ProcessSection() {
                   <p className="text-white text-sm md:text-base lg:text-lg opacity-80 leading-relaxed">
                     {step.description}
                   </p>
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -182,7 +265,7 @@ export default function ProcessSection() {
 
       {/* Right Section - Image */}
       <motion.div 
-        className="w-full lg:w-1/2 relative "
+        className="w-full lg:w-1/2 relative bg-gray-900"
         //@ts-expect-error
         variants={imageVariants}
         initial="hidden"
@@ -191,9 +274,8 @@ export default function ProcessSection() {
         <Image
           src="/images/process.png"
           alt="Team members"
-          width={600}
-          height={600}
-          className="object-cover md:mt-16 mx-auto"
+          fill
+          className="object-cover"
           priority
         />
       </motion.div>

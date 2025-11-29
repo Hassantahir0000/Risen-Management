@@ -60,10 +60,10 @@ export default function ServicesSection() {
         </motion.h2>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 lg:items-start">
           {/* Left - Image */}
           <motion.div 
-            className="relative w-full min-h-[400px] lg:min-h-[500px] order-2 lg:order-1"
+            className="relative w-full my-auto order-2 lg:order-1"
             initial={{ opacity: 0, x: -50, scale: 0.95 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: -50, scale: 0.95 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
@@ -73,19 +73,20 @@ export default function ServicesSection() {
               altText="Creative team"
               containerHeight="100%"
               containerWidth="100%"
-              imageHeight="100%"
-              imageWidth="100%"
+              imageHeight="370px"
+              imageWidth="529px"
               scaleOnHover={1.05}
               rotateAmplitude={10}
               showMobileWarning={false}
               showTooltip={false}
+              
             />
           </motion.div>
 
           {/* Right - Services List */}
           <motion.div 
             ref={servicesRef}
-            className="order-1 lg:order-2 space-y-0"
+            className="order-1 lg:order-2 space-y-0 flex flex-col"
             initial="hidden"
             animate={servicesInView ? "visible" : "hidden"}
           >
@@ -95,8 +96,8 @@ export default function ServicesSection() {
                 variants={serviceVariants}
                 transition={{ delay: index * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="py-8">
-                  <h3 className="text-[24px] font-bold text-white mb-2">
+                <div className="py-4">
+                  <h3 className="text-[24px] font-bold text-white ">
                     {service.title}
                   </h3>
                   <p className="text-white text-[14px] leading-relaxed opacity-80">

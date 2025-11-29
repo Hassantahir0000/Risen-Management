@@ -86,7 +86,7 @@ export default function FAQSection() {
                 alt="Abstract art"
                 width={315}
                 height={394}
-                className="object-contain"
+                className="object-contain md:mt-30"
                 priority
               />
             </motion.div>
