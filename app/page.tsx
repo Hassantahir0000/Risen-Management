@@ -83,7 +83,7 @@ export default function Home() {
       {/* Content Overlay */}
       <div className="relative z-20 h-full w-full flex flex-col mt-[-18rem] justify-between p-8 md:p-12 lg:p-16">
         {/* Top Section - Elevate & Influence */}
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8 md:gap-0">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between ">
          
          <BlurText
             text="Elevate"

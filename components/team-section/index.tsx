@@ -59,7 +59,7 @@ export default function TeamSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-[48px] text-center md:text-[72px] font-medium leading-20">
+          <h2 className="text-[32px] text-center md:text-[72px] font-medium md:leading-20">
             <span className="text-white">At Risen Management Co We </span>
             <span className="text-gray-300">
               Empower 14{" "}
@@ -79,13 +79,13 @@ export default function TeamSection() {
           {teamMembers.map((member, index) => (
             <motion.div 
               key={index} 
-              className="flex flex-row"
+              className="flex flex-col md:flex-row"
               variants={memberVariants}
               transition={{ delay: index * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Image */}
               <motion.div 
-                className="relative w-[30%] mt-[-20px] h-[248px] mb-auto"
+                className="relative w-full md:w-[30%] mt-[-20px] h-[248px] mb-auto"
                 initial={{ opacity: 0, x: -30 }}
                 animate={teamInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                 transition={{ duration: 0.6, delay: 0.2 + (index * 0.15), ease: [0.22, 1, 0.36, 1] }}
@@ -101,11 +101,12 @@ export default function TeamSection() {
                   rotateAmplitude={10}
                   showMobileWarning={false}
                   showTooltip={false}
+                  
                 />
               </motion.div>
 
              <motion.div 
-               className="flex w-[65%] ml-auto flex-col"
+               className="flex md:w-[65%] items-center md:items-start ml-auto flex-col"
                initial={{ opacity: 0, x: 30 }}
                animate={teamInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
                transition={{ duration: 0.6, delay: 0.3 + (index * 0.15), ease: [0.22, 1, 0.36, 1] }}
@@ -121,7 +122,7 @@ export default function TeamSection() {
               </p>
 
               {/* Description */}
-              <p className="text-[14px] font-light text-white opacity-60 leading-relaxed">
+              <p className="text-[14px] text-center md:text-left font-light text-white opacity-60 leading-relaxed">
                 {member.description}
               </p>
              </motion.div>
