@@ -12,14 +12,14 @@ export default function NetworkSection() {
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const marqueeInView = useInView(marqueeRef, { once: true, amount: 0.1 });
 
-  // Company logos - update these paths with your actual logo images
+  // Company logos from /public/logos folder
   const companies = [
-    { name: "SED WORKS", logo: "/images/network/sed-works.png" },
-    { name: "Pump.fun", logo: "/images/network/pump-fun.png" },
-    { name: "PATEL BROTHERS", logo: "/images/network/patel-brothers.png" },
-    { name: "TEMU", logo: "/images/network/temu.png" },
-    { name: "MANSCAPED", logo: "/images/network/manscaped.png" },
-    { name: "Taco Bell", logo: "/images/network/taco-bell.png" },
+    { name: "Company 1", logo: "/logos/Frame 13.png" },
+    { name: "Company 2", logo: "/logos/image 11.png" },
+    { name: "Company 3", logo: "/logos/image 14.png" },
+    { name: "Company 4", logo: "/logos/image 15.png" },
+    { name: "Company 5", logo: "/logos/image 16.png" },
+    { name: "Company 6", logo: "/logos/image 17.png" },
   ];
 
   // Duplicate the array for seamless loop
