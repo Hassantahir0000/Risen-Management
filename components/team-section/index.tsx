@@ -46,10 +46,6 @@ export default function TeamSection() {
       opacity: 1, 
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
     },
   };
 
@@ -85,7 +81,7 @@ export default function TeamSection() {
               key={index} 
               className="flex flex-row"
               variants={memberVariants}
-              transition={{ delay: index * 0.15 }}
+              transition={{ delay: index * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Image */}
               <motion.div 
