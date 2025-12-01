@@ -63,7 +63,7 @@ export default function ServicesSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 lg:items-start">
           {/* Left - Image */}
           <motion.div 
-            className="relative w-full my-auto order-2 lg:order-1"
+            className="relative w-[50%] mx-auto md:w-full my-auto order-2 lg:order-1"
             initial={{ opacity: 0, x: -50, scale: 0.95 }}
             animate={isInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: -50, scale: 0.95 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}

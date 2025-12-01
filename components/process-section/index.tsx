@@ -184,14 +184,14 @@ export default function ProcessSection() {
         className="w-full lg:w-1/2 bg-black px-8 md:px-12 lg:px-16 xl:px-20 flex flex-col justify-start"
       >
         <motion.h2 
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-12 md:mb-16 leading-tight"
+          className="text-[42px] md:text-[72px]font-bold text-white mb-12 md:mb-16 leading-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <VariableProximity
             label="We like to keep things nice and simple"
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
+            className="text-[42px] md:text-[72px]font-bold text-white"
             fromFontVariationSettings="'wght' 400, 'opsz' 9"
             toFontVariationSettings="'wght' 1000, 'opsz' 40"
             containerRef={containerRef}
@@ -265,7 +265,7 @@ export default function ProcessSection() {
 
       {/* Right Section - Image */}
       <motion.div 
-        className="w-full lg:w-1/2 relative bg-gray-900"
+        className="w-full lg:w-1/2 relative "
         //@ts-expect-error
         variants={imageVariants}
         initial="hidden"
@@ -274,8 +274,9 @@ export default function ProcessSection() {
         <Image
           src="/images/process.png"
           alt="Team members"
-          fill
-          className="object-cover"
+          width={740}
+          height={740}
+          className="object-cover mx-auto"
           priority
         />
       </motion.div>

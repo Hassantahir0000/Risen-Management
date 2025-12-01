@@ -30,14 +30,14 @@ export default function NetworkSection() {
       <div ref={containerRef} className="mx-auto px-8 md:px-12 lg:px-16">
         {/* Heading */}
         <motion.h2 
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center mb-12 md:mb-16 lg:mb-20"
+          className="text-[42px] md:text-[72px]font-bold text-white text-center mb-12 md:mb-16 lg:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <VariableProximity
             label="Our Network"
-            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white"
+            className="text-[42px] md:text-[72px]font-bold text-white"
             fromFontVariationSettings="'wght' 400, 'opsz' 9"
             toFontVariationSettings="'wght' 1000, 'opsz' 40"
             containerRef={containerRef}
