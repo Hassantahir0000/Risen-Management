@@ -276,7 +276,7 @@ export default function ProcessSection() {
           alt="Team members"
           width={740}
           height={740}
-          className="object-cover mx-auto"
+          className="object-cover md:px-0 px-10 mt-10 md:mt-0 mx-auto"
           priority
         />
       </motion.div>

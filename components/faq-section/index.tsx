@@ -57,7 +57,7 @@ export default function FAQSection() {
 
   return (
     <section ref={sectionRef} className="w-full bg-black py-16 md:py-20 lg:py-24">
-      <div className="mx-auto px-8 md:px-12 lg:px-16">
+      <div className="mx-auto px-10 md:px-12 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px]">
           {/* Left Side - FAQs Title and Image */}
           <motion.div 
@@ -76,7 +76,7 @@ export default function FAQSection() {
               FAQs
             </motion.h2>
             <motion.div 
-              className="relative w-[315px] h-[394px]"
+              className="relative mx-auto md:mx-0 w-[315px] h-[394px]"
               initial={{ opacity: 0, scale: 0.9, rotateY: -15 }}
               animate={leftInView ? { opacity: 1, scale: 1, rotateY: 0 } : { opacity: 0, scale: 0.9, rotateY: -15 }}
               transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
