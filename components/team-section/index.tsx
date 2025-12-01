@@ -1,14 +1,25 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { useRef, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TiltedCard from "../shared/tilted-card";
+
+// Register ScrollTrigger plugin (client-only)
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function TeamSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const teamRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const headingTextRef = useRef<HTMLDivElement>(null);
+
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const teamInView = useInView(teamRef, { once: true, amount: 0.1 });
+
   const teamMembers = [
     {
       name: "STEPHEN EAPEN",
@@ -29,7 +40,7 @@ export default function TeamSection() {
       title: "HEAD OF PRODUCTION",
       description:
         "Graduated in 2021 with a criminal law degree from the University of Illinois at Chicago. At 20, he founded his content company. He now owns Payvertise Productions, a social media influencer agency creating the social media group Brown House. He and his team have collaborated with multiple major companies.",
-       image: "/images/krish.png",
+      image: "/images/krish.png",
     },
     {
       name: "RAIYAN CHOWDURY",
@@ -42,53 +53,115 @@ export default function TeamSection() {
 
   const memberVariants = {
     hidden: { opacity: 0, y: 40, scale: 0.95 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       scale: 1,
     },
   };
 
+  // Helper: split text into words and keep trailing space except for last word
+  const wordsWithSpace = (text: string) =>
+    text.split(" ").map((w, i, arr) => (i === arr.length - 1 ? w : w + " "));
+
+  // GSAP: build the heading HTML (preserves color spans) and animate words
+  useEffect(() => {
+    const sectionElement = sectionRef.current;
+    const headingContainer = headingTextRef.current;
+    if (!sectionElement || !headingContainer) return;
+
+    // Build HTML with per-word spans, preserving the colored segments
+    const segment1 = wordsWithSpace("At Risen Management Co We")
+      .map((w) => `<span class="word" style="display:inline-block; opacity:0.45;">${w}</span>`)
+      .join("");
+
+    const segment2_part1 = wordsWithSpace("Empower 14")
+      .map((w) => `<span class="word" style="display:inline-block; opacity:0.45;">${w}</span>`)
+      .join("");
+
+    const segment2_part2 = wordsWithSpace("Exceptional Creators")
+      .map((w) => `<span class="word" style="display:inline-block; opacity:0.45;">${w}</span>`)
+      .join("");
+
+    const segment3 = wordsWithSpace("By Amplifying Their Reach")
+      .map((w) => `<span class="word" style="display:inline-block; opacity:0.45;">${w}</span>`)
+      .join("");
+
+    // Compose the final innerHTML with the same color classes you used
+    headingContainer.innerHTML = `
+      <span class="text-white">${segment1}</span>
+      <span class="text-gray-300"> ${segment2_part1} <span class="text-white">${segment2_part2}</span></span>
+      <span class="text-white"> ${segment3}</span>
+    `;
+
+    // Select the created word spans
+    const wordSpans = headingContainer.querySelectorAll<HTMLElement>(".word");
+    if (!wordSpans || wordSpans.length === 0) return;
+
+    // Create timeline with ScrollTrigger that plays when section enters view
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sectionElement,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    tl.to(wordSpans, {
+      opacity: 1,
+      duration: 0.25, // slow fade per word
+      stagger: 0.20, // slower stagger between words
+      ease: "power2.out",
+    });
+
+    // Cleanup on unmount
+    return () => {
+      // Kill any ScrollTriggers that used this section as trigger
+      ScrollTrigger.getAll().forEach((trigger) => {
+        if (trigger.vars && trigger.vars.trigger === sectionElement) {
+          trigger.kill();
+        }
+      });
+      tl.kill();
+    };
+  }, []);
+
   return (
     <section ref={sectionRef} className="w-full bg-black py-16 md:py-20 lg:py-24">
       <div className="mx-auto px-8 md:px-12 lg:px-16">
         {/* Title Section */}
-        <motion.div 
+        <motion.div
           className="mb-12 md:mb-16 lg:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="text-[32px] text-center md:text-[72px] font-medium md:leading-20">
-            <span className="text-white">At Risen Management Co We </span>
-            <span className="text-gray-300">
-              Empower 14{" "}
-             <span className="text-white opacity-45">Exceptional Creators</span>
-            </span>
-            <span className="text-white opacity-45"> By Amplifying Their Reach</span>
+          <h2 ref={headingRef} className="text-[32px] text-center md:text-[72px] font-medium md:leading-20">
+            {/* This div will be populated/animated by GSAP */}
+            <div ref={headingTextRef} style={{ opacity: 1 }} />
           </h2>
         </motion.div>
 
         {/* Team Grid */}
-        <motion.div 
+        <motion.div
           ref={teamRef}
           className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16"
           initial="hidden"
           animate={teamInView ? "visible" : "hidden"}
         >
           {teamMembers.map((member, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               className="flex flex-col md:flex-row"
               variants={memberVariants}
               transition={{ delay: index * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             >
               {/* Image */}
-              <motion.div 
+              <motion.div
                 className="relative w-full md:w-[30%] mt-[-20px] h-[248px] mb-auto"
                 initial={{ opacity: 0, x: -30 }}
                 animate={teamInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                transition={{ duration: 0.6, delay: 0.2 + (index * 0.15), ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.15, ease: [0.22, 1, 0.36, 1] }}
               >
                 <TiltedCard
                   imageSrc={member.image}
@@ -101,31 +174,26 @@ export default function TeamSection() {
                   rotateAmplitude={10}
                   showMobileWarning={false}
                   showTooltip={false}
-                  
                 />
               </motion.div>
 
-             <motion.div 
-               className="flex md:w-[65%] items-center md:items-start ml-auto flex-col"
-               initial={{ opacity: 0, x: 30 }}
-               animate={teamInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-               transition={{ duration: 0.6, delay: 0.3 + (index * 0.15), ease: [0.22, 1, 0.36, 1] }}
-             >
-                 {/* Name */}
-              <h3 className="text-[24px] font-bold text-white mb-2">
-                {member.name}
-              </h3>
+              <motion.div
+                className="flex md:w-[65%] items-center md:items-start ml-auto flex-col"
+                initial={{ opacity: 0, x: 30 }}
+                animate={teamInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                transition={{ duration: 0.6, delay: 0.3 + index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {/* Name */}
+                <h3 className="text-[24px] font-bold text-white mb-2">{member.name}</h3>
 
-              {/* Title */}
-              <p className="text-[14px] uppercase text-gray-400 mb-2 ">
-                {member.title}
-              </p>
+                {/* Title */}
+                <p className="text-[14px] uppercase text-gray-400 mb-2 ">{member.title}</p>
 
-              {/* Description */}
-              <p className="text-[14px] text-center md:text-left font-light text-white opacity-60 leading-relaxed">
-                {member.description}
-              </p>
-             </motion.div>
+                {/* Description */}
+                <p className="text-[14px] text-center md:text-left font-light text-white opacity-60 leading-relaxed">
+                  {member.description}
+                </p>
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
@@ -133,4 +201,3 @@ export default function TeamSection() {
     </section>
   );
 }
-
