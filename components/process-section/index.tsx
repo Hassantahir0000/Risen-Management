@@ -128,8 +128,10 @@ export default function ProcessSection() {
         start: "top top",
         end: "+=1000", // Scroll distance to complete animation
         pin: true,
+        pinSpacing: true,
         scrub: 1, // Smooth scrubbing
         anticipatePin: 1,
+        invalidateOnRefresh: true,
       },
     });
 
@@ -176,12 +178,12 @@ export default function ProcessSection() {
   return (
     <section 
       ref={sectionRef}
-      className="w-full my-20 min-h-screen bg-black flex flex-col lg:flex-row lg:items-stretch"
+      className="w-full  my-20 md:mt-auto md:mb-auto min-h-screen lg:h-screen bg-black flex flex-col lg:flex-row lg:items-stretch overflow-hidden"
     >
       {/* Left Section - Text Content */}
       <div 
         ref={containerRef}
-        className="w-full lg:w-1/2 bg-black px-8 md:px-12 lg:px-16 xl:px-20 flex flex-col justify-start"
+        className="w-full lg:w-1/2 bg-black px-8 md:px-12 lg:px-16 xl:px-20 flex flex-col justify-start lg:h-full"
       >
         <motion.h2 
           className="text-[42px] md:text-[72px]font-bold text-white mb-12 md:mb-16 leading-tight"
@@ -265,20 +267,22 @@ export default function ProcessSection() {
 
       {/* Right Section - Image */}
       <motion.div 
-        className="w-full lg:w-1/2 relative "
+        className="w-full lg:w-1/2 relative lg:h-full flex items-center justify-center"
         //@ts-expect-error
         variants={imageVariants}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
       >
-        <Image
-          src="/images/process.png"
-          alt="Team members"
-          width={740}
-          height={740}
-          className="object-cover md:px-0 px-10 mt-10 md:mt-0 mx-auto"
-          priority
-        />
+        <div className="relative w-full h-full min-h-[400px] md:min-h-[500px] lg:min-h-0 lg:h-full">
+          <Image
+            src="/images/process.png"
+            alt="Team members"
+            width={720}
+            height={720}
+            className="object-contain lg:object-cover md:px-0 px-10 mt-10 md:mt-0"
+            priority
+          />
+        </div>
       </motion.div>
     </section>
   );
