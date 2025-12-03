@@ -18,13 +18,25 @@ export default function Navbar({ sections }: NavbarProps) {
 
   const scrollToSection = (sectionId: string) => {
     const section = sections.find((s) => s.id === sectionId);
-    if (section?.ref.current) {
-      section.ref.current.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false); // Close mobile menu after clicking
-    } else if (sectionId === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      setIsOpen(false);
-    }
+    
+    // Close mobile menu first
+    setIsOpen(false);
+    
+    // Use requestAnimationFrame for better mobile compatibility
+    requestAnimationFrame(() => {
+      if (section?.ref.current) {
+        const element = section.ref.current;
+        const offsetTop = element.offsetTop;
+        const navbarHeight = 64; // Approximate navbar height
+        
+        window.scrollTo({
+          top: offsetTop - navbarHeight,
+          behavior: "smooth",
+        });
+      } else if (sectionId === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    });
   };
 
   // Update active section on scroll
@@ -146,8 +158,12 @@ export default function Navbar({ sections }: NavbarProps) {
               {sections.map((section) => (
                 <button
                   key={section.id}
-                  onClick={() => scrollToSection(section.id)}
-                  className={`block w-full text-left text-base font-medium py-2 transition-colors duration-300 ${
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    scrollToSection(section.id);
+                  }}
+                  className={`block w-full text-left text-base font-medium py-2 transition-colors duration-300 cursor-pointer ${
                     activeSection === section.id
                       ? "text-[#EB3912]"
                       : "text-white hover:text-[#EB3912]"
