@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
+import Marquee from "react-fast-marquee";
 import VariableProximity from "@/components/shared/variable-proximity";
 
 export default function NetworkSection() {
@@ -14,16 +15,13 @@ export default function NetworkSection() {
 
   // Company logos from /public/logos folder
   const companies = [
-    { name: "Company 1", logo: "/logos/Frame 13.png" },
-    { name: "Company 2", logo: "/logos/image 11.png" },
-    { name: "Company 3", logo: "/logos/image 14.png" },
-    { name: "Company 4", logo: "/logos/image 15.png" },
-    { name: "Company 5", logo: "/logos/image 16.png" },
-    { name: "Company 6", logo: "/logos/image 17.png" },
+    { name: "Company 1", logo: "/logos/image1.png" },
+    { name: "Company 2", logo: "/logos/image2.png" },
+    { name: "Company 3", logo: "/logos/image3.png" },
+    { name: "Company 4", logo: "/logos/image4.png" },
+    { name: "Company 5", logo: "/logos/image5.png" },
+    { name: "Company 6", logo: "/logos/image6.png" },
   ];
-
-  // Duplicate the array for seamless loop
-  const duplicatedCompanies = [...companies, ...companies];
 
   return (
     <section ref={sectionRef} className="w-full bg-black py-16 md:py-20 lg:py-24 overflow-hidden">
@@ -52,11 +50,11 @@ export default function NetworkSection() {
           className="relative w-full overflow-hidden"
           initial={{ opacity: 0 }}
           animate={marqueeInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.2, delay: 0.3 }}
         >
           {/* Marquee Wrapper */}
-          <div className="flex animate-marquee whitespace-nowrap">
-            {duplicatedCompanies.map((company, index) => (
+          <Marquee speed={120} loop={0} gradient={false} pauseOnHover={true}>
+            {companies.map((company, index) => (
               <motion.div
                 key={index}
                 className="flex items-center justify-center mx-8 md:mx-12 lg:mx-16 shrink-0"
@@ -74,7 +72,7 @@ export default function NetworkSection() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </Marquee>
         </motion.div>
       </div>
 

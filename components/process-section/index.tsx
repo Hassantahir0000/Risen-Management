@@ -125,7 +125,7 @@ export default function ProcessSection() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionElement,
-        start: "top top",
+        start: "top",
         end: "+=1000", // Scroll distance to complete animation
         pin: true,
         pinSpacing: true,

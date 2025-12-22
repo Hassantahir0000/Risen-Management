@@ -8,10 +8,10 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    { name: "Twitter(X)", url: "#" },
-    { name: "LinkedIn", url: "#" },
-    { name: "Instagram", url: "#" },
-    { name: "Behance", url: "#" },
+    // { name: "Twitter(X)", url: "#" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/company/risen-management-co/" },
+    { name: "Instagram", url: "https://www.instagram.com/risenmgmtco/" },
+    // { name: "Behance", url: "#" },
   ];
 
   return (
@@ -21,14 +21,14 @@ export default function Footer() {
         <div className="mx-auto px-8 md:px-12 lg:px-16 py-6 md:py-8">
           <nav className="flex flex-wrap gap-6 md:gap-8 w-full justify-between">
             {socialLinks.map((link, index) => (
-              <a
+              <p
                 key={index}
-                href={link.url}
-                className="text-white text-sm md:text-base font-light hover:opacity-70 transition-opacity flex items-center gap-2"
+                onClick={() => window.open(link.url, "_blank")}
+                className="text-white cursor-pointer text-sm md:text-base font-light hover:opacity-70 transition-opacity flex items-center gap-2"
               >
                 {link.name}
                 <span className="text-white">→</span>
-              </a>
+              </p>
             ))}
           </nav>
         </div>
