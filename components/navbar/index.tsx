@@ -107,7 +107,7 @@ export default function Navbar({ sections }: NavbarProps) {
           <div className="hidden md:flex items-center justify-end w-1/3">
             <button
               onClick={() => scrollToSection("contact")}
-              className={`text-sm lg:text-base font-medium transition-colors duration-300 ${
+              className={`text-sm lg:text-base cursor-pointer font-medium transition-colors duration-300 ${
                 activeSection === "contact"
                   ? "text-[#EB3912]"
                   : "text-white hover:text-[#EB3912]"
