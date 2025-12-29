@@ -32,7 +32,7 @@ export default function Home() {
     { id: "home", label: "Home", ref: homeRef },
     { id: "about", label: "About", ref: teamSectionRef },
     { id: "services", label: "Services", ref: servicesSectionRef },
-    { id: "how-it-works", label: "FAQ", ref: processSectionRef },
+    { id: "how-it-works", label: "How it Works", ref: processSectionRef },
     { id: "contact", label: "Contact", ref: footerRef },
   ];
 

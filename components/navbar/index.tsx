@@ -22,21 +22,29 @@ export default function Navbar({ sections }: NavbarProps) {
     // Close mobile menu first
     setIsOpen(false);
     
-    // Use requestAnimationFrame for better mobile compatibility
-    requestAnimationFrame(() => {
+    // Add delay for mobile to ensure menu closes and DOM updates before scrolling
+    setTimeout(() => {
+      if (sectionId === "home") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
       if (section?.ref.current) {
         const element = section.ref.current;
-        const offsetTop = element.offsetTop;
-        const navbarHeight = 64; // Approximate navbar height
         
+        // Calculate scroll position accounting for fixed navbar
+        const rect = element.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const navbarHeight = 80; // Account for navbar height
+        const targetPosition = rect.top + scrollTop - navbarHeight;
+        
+        // Use scrollTo with smooth behavior for better mobile support
         window.scrollTo({
-          top: offsetTop - navbarHeight,
+          top: Math.max(0, targetPosition), // Ensure we don't scroll to negative position
           behavior: "smooth",
         });
-      } else if (sectionId === "home") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
       }
-    });
+    }, 150); // Delay to ensure menu closes and prevents scroll conflicts
   };
 
   // Update active section on scroll
@@ -119,9 +127,14 @@ export default function Navbar({ sections }: NavbarProps) {
 
           {/* Mobile Hamburger Button */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-white p-2"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsOpen(!isOpen);
+            }}
+            className="md:hidden text-white p-2 touch-manipulation"
             aria-label="Toggle menu"
+            type="button"
           >
             <div className="w-6 h-6 flex flex-col justify-center gap-1.5">
               <motion.span
@@ -163,11 +176,12 @@ export default function Navbar({ sections }: NavbarProps) {
                     e.stopPropagation();
                     scrollToSection(section.id);
                   }}
-                  className={`block w-full text-left text-base font-medium py-2 transition-colors duration-300 cursor-pointer ${
+                  className={`block w-full text-left text-base font-medium py-2 transition-colors duration-300 cursor-pointer touch-manipulation ${
                     activeSection === section.id
                       ? "text-[#EB3912]"
                       : "text-white hover:text-[#EB3912]"
                   }`}
+                  type="button"
                 >
                   {section.label}
                 </button>
