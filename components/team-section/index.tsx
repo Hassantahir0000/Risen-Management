@@ -37,7 +37,7 @@ export default function TeamSection() {
       name: "KRISH GIDWANI",
       title: "HEAD OF PRODUCTION",
       description:
-        "",
+        "Stephen came graduated in 2021 with a degree in criminal law from the University of Illinois at Chicago. At just 20 years old, he founded his content company demonstrating raw entrepreneurial drive. He now owns Payvertise Productions, a social media influencer agency creating the social media group Brown House. Over the course of this year, he and his team have collaborated with multiple major companies, further establishing his presence across business and media industries.",
        image: "/images/krish.png",
     },
     {
@@ -108,50 +108,58 @@ export default function TeamSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full bg-black py-16 md:py-20 lg:py-24">
+<section ref={sectionRef} className="w-full bg-black py-16 md:py-20 lg:py-24">
       <div className="mx-auto px-8 md:px-12 lg:px-16">
-        {/* Title Section */}
-        <motion.div 
+        {/* Heading */}
+        <motion.div
           className="mb-12 md:mb-16 lg:mb-20"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 
+          <h2
             ref={headingRef}
-            className="text-[32px] text-white text-center md:text-[72px] font-medium md:leading-20"
+            className="text-[32px] md:text-[72px] font-medium text-white text-center"
           >
             <div ref={headingTextRef}>
-              <span className="text-white">At Risen Management Co We </span>
-              <span className="text-white">
-                Empower 14{" "}
-                <span className="text-white">Exceptional Creators</span>
-              </span>
-              <span className="text-white"> By Amplifying Their Reach</span>
+              At Risen Management Co We Empower 14 Exceptional Creators By
+              Amplifying Their Reach
             </div>
           </h2>
         </motion.div>
 
         {/* Team Grid */}
-        <motion.div 
+        <motion.div
           ref={teamRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 lg:gap-16"
+          className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16"
           initial="hidden"
           animate={teamInView ? "visible" : "hidden"}
         >
           {teamMembers.map((member, index) => (
-            <motion.div 
-              key={index} 
-              className="flex flex-col md:flex-row"
+            <motion.div
+              key={member.name}
+              className="flex flex-col md:flex-row items-start gap-6 md:gap-8"
               variants={memberVariants}
-              transition={{ delay: index * 0.15, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{
+                delay: index * 0.15,
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
               {/* Image */}
-              <motion.div 
-                className="relative w-full md:w-[30%] mt-[-20px] h-[248px] mb-auto"
+              <motion.div
+                className="relative w-full md:w-[30%] h-[248px] flex-shrink-0"
                 initial={{ opacity: 0, x: -30 }}
-                animate={teamInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-                transition={{ duration: 0.6, delay: 0.2 + (index * 0.15), ease: [0.22, 1, 0.36, 1] }}
+                animate={
+                  teamInView
+                    ? { opacity: 1, x: 0 }
+                    : { opacity: 0, x: -30 }
+                }
+                transition={{
+                  duration: 0.6,
+                  delay: 0.2 + index * 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               >
                 <TiltedCard
                   imageSrc={member.image}
@@ -164,31 +172,36 @@ export default function TeamSection() {
                   rotateAmplitude={10}
                   showMobileWarning={false}
                   showTooltip={false}
-                  
                 />
               </motion.div>
 
-             <motion.div 
-               className="flex md:w-[65%] items-center md:items-start ml-auto flex-col"
-               initial={{ opacity: 0, x: 30 }}
-               animate={teamInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-               transition={{ duration: 0.6, delay: 0.3 + (index * 0.15), ease: [0.22, 1, 0.36, 1] }}
-             >
-                 {/* Name */}
-              <h3 className="text-[24px] font-bold text-white mb-2">
-                {member.name}
-              </h3>
-
-              {/* Title */}
-              <p className="text-[14px] uppercase text-gray-400 mb-2 ">
-                {member.title}
-              </p>
-
-              {/* Description */}
-              <p className="text-[14px] text-center md:text-left font-light text-white opacity-60 leading-relaxed">
-                {member.description}
-              </p>
-             </motion.div>
+              {/* Text */}
+              <motion.div
+                className="flex flex-col md:w-[70%] items-start"
+                initial={{ opacity: 0, x: 30 }}
+                animate={
+                  teamInView
+                    ? { opacity: 1, x: 0 }
+                    : { opacity: 0, x: 30 }
+                }
+                transition={{
+                  duration: 0.6,
+                  delay: 0.3 + index * 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
+                <h3 className="text-[24px] font-bold text-white leading-tight mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-[12px] uppercase tracking-wider text-gray-400 mb-3">
+                  {member.title}
+                </p>
+                {member.description && (
+                  <p className="text-[14px] font-light text-white opacity-60 leading-relaxed">
+                    {member.description}
+                  </p>
+                )}
+              </motion.div>
             </motion.div>
           ))}
         </motion.div>
