@@ -107,13 +107,10 @@ export default function Home() {
         <div className="flex flex-col mt-40 md:flex-row md:items-end md:justify-between gap-6 md:gap-0">
           {/* Left - Description */}
           <p className="text-white text-sm md:text-base lg:text-lg font-light max-w-md">
-            Bold digital design and brand identity that sets you apart.
+            The Choice that helps <br /> creators rise
           </p>
 
-          {/* Center - Date */}
-          <p className="text-white text-sm md:text-base lg:text-lg font-light">
-            Available Jun, 2025.
-          </p>
+       
 
           {/* Right - Arrow */}
           <div className="flex justify-end">

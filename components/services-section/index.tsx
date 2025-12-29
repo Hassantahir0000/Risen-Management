@@ -14,19 +14,19 @@ export default function ServicesSection() {
 
   const services = [
     {
-      title: "Content Creation",
+      title: "Clear Direction",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "We align on goals, audience, and positioning so growth is intentional — not random.",
     },
     {
-      title: "Social Management",
+      title: "Consistent Execution",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "We manage the systems behind content and operations to keep momentum moving without burnout.",
     },
     {
-      title: "Paid Media",
+      title: "Brand Development",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "We help turn influence into ownership by developing creator-led brands, products, and long-term revenue vehicles.",
     },
   ];
 
@@ -131,7 +131,12 @@ export default function ServicesSection() {
                 )}
               </motion.div>
             ))}
+             <p className="text-white text-[14px] leading-relaxed mt-5">
+                  If you’re ready to build something bigger than views, contact us now.
+              </p>
           </motion.div>
+
+          
         </div>
       </div>
     </section>

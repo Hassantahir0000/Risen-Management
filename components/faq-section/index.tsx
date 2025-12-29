@@ -17,32 +17,36 @@ export default function FAQSection() {
 
   const faqs = [
     {
+      question: "Who do you work with?",
+      answer:
+        "We work with creators, content groups, and brands that are serious about long-term growth. Our partners typically already have momentum and are looking to scale with structure and strategy.",
+    },
+    {
+      question: "What makes Risen different from traditional management agencies?",
+      answer:
+        "Risen operates as a growth partner, not just a manager. We focus on building systems, developing brands, and creating long-term value — not just booking deals.",
+    },
+    {
       question: "What services do you offer?",
       answer:
-        "I focus on digital design and brand identity — including websites, apps, and visual systems. I also offer design direction and consulting when needed.",
+        "We support creators and brands across content strategy, operations, sponsorships, and brand development. Every partnership is customized.",
     },
     {
-      question: "Do you work with startups or only big brands?",
+      question: "Do you manage creators exclusively?",
       answer:
-        "I work with both startups and established brands. Each project is unique, and I adapt my approach to meet the specific needs and goals of the client.",
+        "It depends on the partnership. We work across both exclusive and non-exclusive arrangements based on goals, scope, and alignment.",
     },
     {
-      question: "What's your typical process like?",
+      question: "Do you help creators build their own brands or products?",
       answer:
-        "My process typically begins with understanding your brand and goals, followed by research and strategy. Then I move into design exploration, refinement, and final delivery with clear communication throughout.",
+        "Yes. Brand development is a core part of what we do. We work with creators to turn influence into ownership through products, partnerships, and long-term brand opportunities.",
     },
     {
-      question: "Do you also develop the websites you design?",
+      question: "How do we start working together?",
       answer:
-        "I specialize in design and brand identity. For development, I collaborate with trusted developers or can recommend partners who can bring the designs to life.",
-    },
-    {
-      question: "How can we start working together?",
-      answer:
-        "Reach out through the contact form or email, and let's discuss your project. I'll review your needs and provide a proposal with timeline and investment details.",
+        "Reach out through our contact form with details about what you’re building. If there’s a fit, we’ll set up a conversation to explore next steps.",
     },
   ];
-
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };

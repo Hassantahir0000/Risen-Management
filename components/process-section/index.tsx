@@ -18,6 +18,7 @@ export default function ProcessSection() {
   const stepsRef = useRef<HTMLDivElement>(null);
   const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const stepTextRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const variableProximityRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   const stepsInView = useInView(stepsRef, { once: true, amount: 0.2 });
 
@@ -25,17 +26,17 @@ export default function ProcessSection() {
     {
       number: "001",
       title: "Strategy First",
-      description: "We align on goals, audience, and content direction before anything goes live.",
+      description: "We start by understanding the creator, the brand, and the goal. Everything we do is built around long-term growth, not one-off moments.",
     },
     {
       number: "002",
       title: "Create & Manage",
-      description: "We handle the production, scheduling, and posting across all key platforms.",
+      description: "From content operations to sponsorships and brand launches, We handle the execution behind the scenes so creators can focus on creating.",
     },
     {
       number: "003",
       title: "Review & Refine",
-      description: "We track performance, learn what's working, and adjust as needed.",
+      description: "We track what’s working, refine what isn’t, and scale what hits. The goal is simple: turn influence into something that lasts.",
     },
   ];
 
@@ -121,11 +122,18 @@ export default function ProcessSection() {
       }
     });
 
+    // Set initial opacity to 0 for VariableProximity components
+    variableProximityRefs.current.forEach((variableProximityRef) => {
+      if (variableProximityRef) {
+        gsap.set(variableProximityRef, { opacity: 0 });
+      }
+    });
+
     // Create a timeline for all three number animations
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionElement,
-        start: "top",
+        start: "top top", // Start when section top hits viewport top
         end: "+=1000", // Scroll distance to complete animation
         pin: true,
         pinSpacing: true,
@@ -160,6 +168,22 @@ export default function ProcessSection() {
             ease: "power2.out",
           },
           index * 0.2 // Same timing as the number
+        );
+      }
+    });
+
+    // Animate VariableProximity components after the third step (index 2) completes
+    // Third step starts at 0.4 (2 * 0.2) and has duration 0.8, so it completes around 1.2
+    variableProximityRefs.current.forEach((variableProximityRef, index) => {
+      if (variableProximityRef) {
+        tl.to(
+          variableProximityRef,
+          {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          1.3 + (index * 0.1) // Start after third step completes, with slight stagger
         );
       }
     });
@@ -262,7 +286,31 @@ export default function ProcessSection() {
               </motion.div>
             ))}
           </motion.div>
+
+          
         </div>
+
+       <div className="flex flex-col gap-y-2 mt-10">
+         <p
+           ref={(el) => {
+             variableProximityRefs.current[0] = el;
+           }}
+           style={{ opacity: 0 }}
+           className="text-[18px] text-white"
+         >
+           We work with creators, brands, and partners at different stages.
+         </p>
+
+         <p
+           ref={(el) => {
+             variableProximityRefs.current[1] = el;
+           }}
+           style={{ opacity: 0 }}
+           className="text-[18px] text-white"
+         >
+           If you&apos;re building something and need the right team behind it contact us.
+         </p>
+       </div>
       </div>
 
       {/* Right Section - Image */}

@@ -23,28 +23,28 @@ export default function TeamSection() {
       name: "STEPHEN EAPEN",
       title: "CO-FOUNDER / CEO",
       description:
-        "Graduated in 2021 with a criminal law degree from the University of Illinois at Chicago. At 20, he founded a consulting company, demonstrating early entrepreneurial drive. He now owns a private equity firm and has expanded into the digital space, managing social media influencers and operating the social media group Brownhouse. He and his team have collaborated with multiple major companies.",
+        "Stephen Eapen graduated in 2021 with a degree in criminal law from the University of Illinois at Chicago. At just 20 years old, he founded a consulting company, demonstrating early entrepreneurial drive. He now owns a private equity firm and has expanded into the digital space, managing social media influencers and operating the social media group Brownhouse. Over the course of his career, he and his team have collaborated with multiple major companies, further establishing his presence across business and media industries.",
       image: "/images/stephen.png",
     },
     {
       name: "YASH PATEL",
       title: "CO-FOUNDER / COO",
       description:
-        "Earned his MBA in business analytics from Drexel University in 2024, building on an early career as a mechanical engineer at ProShares Grey. In 2021, he launched a successful medical consulting company. He has founded and contributed to numerous ventures, focusing on integrating technology to automate operations, enhance customer engagement, and drive growth. His expertise includes management and business strategy.",
+        "With an MBA from Drexel University focused on strategic management and a foundation in mechanical engineering, Yash Patel co-founded Risen Management to bring structure and execution to the creator economy. His background includes building and operating businesses across real estate and other operations-driven industries, leading teams and scaling complex systems. As Co-Founder and COO, he oversees strategy, operations, and brand development — helping creators turn influence into scalable, long-term businesses.",
       image: "/images/yash.png",
     },
     {
       name: "KRISH GIDWANI",
       title: "HEAD OF PRODUCTION",
       description:
-        "Graduated in 2021 with a criminal law degree from the University of Illinois at Chicago. At 20, he founded his content company. He now owns Payvertise Productions, a social media influencer agency creating the social media group Brown House. He and his team have collaborated with multiple major companies.",
+        "",
        image: "/images/krish.png",
     },
     {
       name: "RAIYAN CHOWDURY",
       title: "CREATIVE DIRECTOR",
       description:
-        "Earned his Bachelor of Science in Management Information Systems, graduating in 2020 from the University of Cincinnati. He has advanced his career in creative media, directing and producing viral ads, short films, and visual projects, generating tens of millions of views worldwide. His mix of creativity, technical skill, strategic thinking, and visual flare has led to engagements with multiple major brands.",
+        "Raiyan Chowdury earned his bachelor's of science in management information systems, graduating in 2020 from the University of Cincinnati. Since then, he has advanced his career in creative media, mainly directing and producing various viral ads, short films, and standout visual projects. His work has consistently generated tens of millions of views worldwide. Raiyan’s mix of creativity, technical skill, strategic thinking, and visual flare has led to engagements with multiple major brands. In addition, he has helped expand and scale Brown House Media’s partnerships with more than a dozen social media influencers. Prior to becoming a full-time filmmaker/videographer, he worked in the tech sales industry for Fortune 200 companies.",
       image: "/images/raiyan.png",
     },
   ];

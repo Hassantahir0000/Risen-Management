@@ -21,6 +21,9 @@ export default function NetworkSection() {
     { name: "Company 4", logo: "/logos/image4.png" },
     { name: "Company 5", logo: "/logos/image5.png" },
     { name: "Company 6", logo: "/logos/image6.png" },
+    { name: "Company 7", logo: "/logos/image7.png" },
+    { name: "Company 8", logo: "/logos/image8.png" },
+    { name: "Company 9", logo: "/logos/image9.png" },
   ];
 
   return (
