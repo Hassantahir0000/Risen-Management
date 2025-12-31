@@ -33,19 +33,19 @@ export default function TeamSection() {
         "With an MBA from Drexel University focused on strategic management and a foundation in mechanical engineering, Yash Patel co-founded Risen Management to bring structure and execution to the creator economy. His background includes building and operating businesses across real estate and other operations-driven industries, leading teams and scaling complex systems. As Co-Founder and COO, he oversees strategy, operations, and brand development — helping creators turn influence into scalable, long-term businesses.",
       image: "/images/yash.png",
     },
-    {
+      {
       name: "KRISH GIDWANI",
       title: "HEAD OF PRODUCTION",
       description:
-        "Stephen came graduated in 2021 with a degree in criminal law from the University of Illinois at Chicago. At just 20 years old, he founded his content company demonstrating raw entrepreneurial drive. He now owns Payvertise Productions, a social media influencer agency creating the social media group Brown House. Over the course of this year, he and his team have collaborated with multiple major companies, further establishing his presence across business and media industries.",
-       image: "/images/krish.png",
+        "Krish Gidwani graduated from Texas Tech University with a bachelor's degree in computer engineering. He began his corporate career as a software engineer at Amazon, quickly establishing himself in a highly competitive field. After gaining industry experience, he pivoted into the content-creator space—a passion he has carried since his teenage years. Today, Krish applies both his technical background and creative vision to build his presence in digital media, collaborating with creators and expanding his influence across the online landscape.",
+      image: "/images/krish.jpeg",
     },
     {
       name: "RAIYAN CHOWDURY",
       title: "CREATIVE DIRECTOR",
       description:
-        "Raiyan Chowdury earned his bachelor's of science in management information systems, graduating in 2020 from the University of Cincinnati. Since then, he has advanced his career in creative media, mainly directing and producing various viral ads, short films, and standout visual projects. His work has consistently generated tens of millions of views worldwide. Raiyan’s mix of creativity, technical skill, strategic thinking, and visual flare has led to engagements with multiple major brands. In addition, he has helped expand and scale Brown House Media’s partnerships with more than a dozen social media influencers. Prior to becoming a full-time filmmaker/videographer, he worked in the tech sales industry for Fortune 200 companies.",
-      image: "/images/raiyan.png",
+        "Raiyan Chowdhury earned his Bachelor of Science in management information systems, graduating in 2022 from the University of Illinois at Chicago. Since then, he has carved a name for himself in the creative industry, directing and producing award-winning short films and standout visual projects. His work has collectively garnered tens of millions of views across various platforms, showcasing his ability to blend storytelling, strategy, and visual impact to resonate with global audiences. His wide-ranging and dynamic video portfolio includes collaborations with high-profile brands such as McLaren, as well as partnerships with more than a dozen social media creators with over a million followers. Prior to full-time videography, he worked in the tech sales industry for Fortune 200 companies.",
+      image: "/images/raiyan.jpeg",
     },
   ];
 
